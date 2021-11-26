@@ -1,6 +1,7 @@
 node {
     stage("Stage 1") {
-        echo "hello. this is stage 1..."
+        echo "hello. this is stage 1... checkout scm"
+        checkout scm
     }
 
     stage("Stage 2") {
