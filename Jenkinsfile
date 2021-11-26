@@ -6,8 +6,4 @@ node {
     stage("Stage 2") {
         echo "hello. this is stage 2..."
     }
-
-    stage("Stage 3") {
-        echo "hello. this is stage 3..."
-    }
 }
