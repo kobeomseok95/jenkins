@@ -10,4 +10,8 @@ node {
     stage("Stage 3") {
         echo "hello. this is stage 3..."
     }
+
+    stage("Stage 4") {
+        echo "hello. this is stage 4..."
+    }
 }
