@@ -1,13 +1,18 @@
 pipeline {
     stages {
-        stage('Static Analysis') {
+        stage('Build') {
             steps {
-                echo 'Run the static analysis to the code'
+                echo 'Build...'
             }
         }
-        stage('Compile') {
+        stage('Test') {
             steps {
-                echo 'Compile the source code'
+                echo 'Test...'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'deploy...'
             }
         }
     }
