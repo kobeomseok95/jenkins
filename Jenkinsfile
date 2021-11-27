@@ -5,7 +5,7 @@ pipeline {
     environment {
         dockerImage = ''
         registry = 'kobeomseok95/springbootapp'
-        registryCredential == 'jenkins-docker-hub-credentials'
+        registryCredential = 'jenkins-docker-hub-credentials'
     }
 
     stages {
