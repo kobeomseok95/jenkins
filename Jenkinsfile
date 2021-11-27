@@ -1,8 +1,13 @@
 node {
-    stage("Build") {
-        checkout(
-            [$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'jenkins-github', url: 'https://github.com/kobeomseok95/jenkins.git']]]
-        )
+    stage("checkout SCM") {
+        checkout([
+            $class: 'GitSCM',
+            branches: [[name: 'main']],
+            userRemoteConfigs: [[
+                credentialsId: 'jenkins-github',
+                url: 'https://github.com/kobeomseok95/jenkins.git'
+            ]]
+        ])
         echo "Build complete..."
     }
 
