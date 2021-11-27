@@ -1,17 +1,11 @@
-node {
-    stage("checkout SCM") {
-        checkout([
-            $class: 'GitSCM',
-            branches: [[name: 'main']],
-            userRemoteConfigs: [[
+pipeline {
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main',
                 credentialsId: 'jenkins-github',
                 url: 'https://github.com/kobeomseok95/jenkins.git'
-            ]]
-        ])
-        echo "Build complete..."
-    }
-
-    stage("Stage 2") {
-        echo "hello. this is stage 2..."
+            }
+        }
     }
 }
