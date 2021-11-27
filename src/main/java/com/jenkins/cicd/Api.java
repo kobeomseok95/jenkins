@@ -1,5 +1,6 @@
 package com.jenkins.cicd;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -9,13 +10,9 @@ import java.net.InetAddress;
 public class Api {
 
     @GetMapping("/")
-    public String main() throws Exception {
+    public ResponseEntity<HostInfoDto> main() throws Exception {
         String hostAddress = InetAddress.getLocalHost().getHostAddress();
         String hostName = InetAddress.getLocalHost().getHostName();
-        /**
-         *  TODO
-         *      return 변경 > 단순 String에서 JSON으로 변경하기
-         */
-        return hostAddress + ", " + hostName;
+        return ResponseEntity.ok(HostInfoDto.builder().hostAddress(hostAddress).hostName(hostName).build());
     }
 }
