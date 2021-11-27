@@ -9,7 +9,7 @@ import java.net.InetAddress;
 public class Api {
 
     @GetMapping("/")
-    public String health() throws Exception {
+    public String main() throws Exception {
         String hostAddress = InetAddress.getLocalHost().getHostAddress();
         String hostName = InetAddress.getLocalHost().getHostName();
         /**
