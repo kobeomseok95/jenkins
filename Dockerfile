@@ -1,7 +1,7 @@
 FROM openjdk:11-jdk-slim
 
-ARG JAR_FILE_PATH=build/libs/*.jar
+COPY build/libs/*.jar app.jar
 
-COPY ${JAR_FILE_PATH} app.jar
+EXPOSE 8080
 
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-jar", "/app.jar"]
