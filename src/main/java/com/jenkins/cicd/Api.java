@@ -18,9 +18,4 @@ public class Api {
          */
         return hostAddress + ", " + hostName;
     }
-
-    @GetMapping("/health")
-    public String health() {
-        return "OK";
-    }
 }
