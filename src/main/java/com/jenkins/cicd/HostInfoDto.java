@@ -8,6 +8,8 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class HostInfoDto {
+
     private String hostName;
+
     private String hostAddress;
 }
