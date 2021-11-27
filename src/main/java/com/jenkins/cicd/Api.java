@@ -20,7 +20,7 @@ public class Api {
     }
 
     @GetMapping("/health")
-    public String health() {
+    public String healthCheck() {
         return "OK";
     }
 }
