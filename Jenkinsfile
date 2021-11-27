@@ -8,7 +8,12 @@ pipeline {
         }
         stage('Unit Test') {
             steps {
-                echo 'Test....'
+                echo 'Unit Test....'
+            }
+        }
+        stage('Integration Test') {
+            steps {
+                echo 'Integration Test....'
             }
         }
         stage('Deploy') {
