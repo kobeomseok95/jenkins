@@ -11,11 +11,6 @@ pipeline {
                 echo 'Unit Test....'
             }
         }
-        stage('Integration Test') {
-            steps {
-                echo 'Integration Test....'
-            }
-        }
         stage('Deploy') {
             steps {
                 echo 'deploy....'
