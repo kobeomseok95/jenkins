@@ -38,7 +38,7 @@ pipeline {
                     sh '''aws deploy create-deployment \
                         --application-name example-codedeploy \
                         --deployment-group-name example-deploy-group \
-                        --s3-location bucket=example-instance-init,key=appspec.yaml,bundleType=yaml \
+                        --s3-location bucket=example-instance-init,key=appspec.yaml,bundleType=YAML \
                         --region ap-northeast-2'''
                 }
             }
