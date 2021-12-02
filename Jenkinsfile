@@ -31,5 +31,13 @@ pipeline {
                 }
             }
         }
+
+        stage('Deploy to EC2') {
+            steps {
+                script {
+                    sh './scripts/deploy.sh'
+                }
+            }
+        }
     }
 }
