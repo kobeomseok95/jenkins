@@ -5,6 +5,7 @@ pipeline {
         dockerImage = ''
         def registry = 'kobeomseok95/springbootapp'
         registryCredential = 'jenkins-docker-hub-credentials'
+        awsCredential = 'aws-credential'
     }
 
     stages {
@@ -33,15 +34,15 @@ pipeline {
         }
 
         stage('Deploy') {
-            steps {
-                script {
-                    sh '''aws deploy create-deployment \
-                        --application-name example-codedeploy \
-                        --deployment-group-name example-deploy-group \
-                        --s3-location bucket=example-instance-init,key=appspec.yaml,bundleType=YAML \
-                        --region ap-northeast-2'''
-                }
-            }
+            step([$class: 'AWSCodeDeployPublisher',
+                applicationName: 'example-codedeploy',
+                credentials: 'aws-credential',
+                deploymentGroupAppspec: true,
+                deploymentGroupName: 'example-deploy-group',
+                deploymentMethod: 'deploy',
+                region: 'ap-northeast-2',
+                s3bucket: 'example-instance-init',
+                waitForCompletion: false])
         }
 
         stage('Delete Image') {
