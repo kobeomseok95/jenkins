@@ -35,8 +35,10 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    sh 'chmod +x scripts/deploy.sh'
-                    sh './scripts/deploy.sh'
+                    sh '''aws deploy create-deployment \
+                        --application-name example-codedeploy \
+                        --deployment-group-name example-deploy-group \
+                        --region ap-northeast-2'''
                 }
             }
         }
