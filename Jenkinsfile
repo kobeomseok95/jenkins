@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         dockerImage = ''
-        registry = 'kobeomseok95/springbootapp'
+        def registry = 'kobeomseok95/springbootapp'
         registryCredential = 'jenkins-docker-hub-credentials'
     }
 
@@ -44,7 +44,7 @@ pipeline {
         stage('Delete Image') {
             steps {
                 script {
-                    sh 'docker rmi &{registry}'
+                    sh 'docker rmi ${registry}'
                 }
             }
         }
