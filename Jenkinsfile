@@ -38,7 +38,6 @@ pipeline {
                 step([$class: 'AWSCodeDeployPublisher',
                                 applicationName: 'example-codedeploy',
                                 credentials: 'aws-credential',
-                                deploymentGroupAppspec: true,
                                 deploymentGroupName: 'example-deploy-group',
                                 deploymentMethod: 'deploy',
                                 region: 'ap-northeast-2',
