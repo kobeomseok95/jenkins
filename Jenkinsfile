@@ -34,15 +34,17 @@ pipeline {
         }
 
         stage('Deploy') {
-            step([$class: 'AWSCodeDeployPublisher',
-                applicationName: 'example-codedeploy',
-                credentials: 'aws-credential',
-                deploymentGroupAppspec: true,
-                deploymentGroupName: 'example-deploy-group',
-                deploymentMethod: 'deploy',
-                region: 'ap-northeast-2',
-                s3bucket: 'example-instance-init',
-                waitForCompletion: false])
+            steps {
+                step([$class: 'AWSCodeDeployPublisher',
+                                applicationName: 'example-codedeploy',
+                                credentials: 'aws-credential',
+                                deploymentGroupAppspec: true,
+                                deploymentGroupName: 'example-deploy-group',
+                                deploymentMethod: 'deploy',
+                                region: 'ap-northeast-2',
+                                s3bucket: 'example-instance-init',
+                                waitForCompletion: false])
+            }
         }
 
         stage('Delete Image') {
