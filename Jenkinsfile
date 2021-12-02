@@ -44,7 +44,7 @@ pipeline {
         stage('Delete Image') {
             steps {
                 script {
-                    sh 'docker rmi $(docker images --quiet --filter=dangling=true)'
+                    sh 'docker rmi &{registry}'
                 }
             }
         }
