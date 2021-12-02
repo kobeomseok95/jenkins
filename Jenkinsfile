@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Build Source') {
             steps {
-                sh './gradlew clean build'
+                sh './gradlew clean build -x test'
             }
         }
 
@@ -38,7 +38,7 @@ pipeline {
                     sh '''aws deploy create-deployment \
                         --application-name example-codedeploy \
                         --deployment-group-name example-deploy-group \
-                        --s3-location bucket=example-instance-init,bundleType=yaml,key=appspec.yaml \
+                        --s3-location bucket=example-instance-init,key=appspec.yaml,bundleType=yaml \
                         --region ap-northeast-2'''
                 }
             }
