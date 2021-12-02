@@ -32,10 +32,19 @@ pipeline {
             }
         }
 
-        stage('Deploy to EC2') {
+        stage('Deploy') {
             steps {
                 script {
+                    sh 'chmod +x /scripts/deploy.sh'
                     sh './scripts/deploy.sh'
+                }
+            }
+        }
+
+        stage('Delete Image') {
+            steps {
+                script {
+                    sh 'docker rmi $(docker images --quiet --filter=dangling=true)'
                 }
             }
         }
