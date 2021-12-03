@@ -52,7 +52,7 @@ pipeline {
                     createDeployment(
                         applicationName: 'example-codedeploy',
                         deploymentGroupName: 'example-deploy-group',
-                        s3Bucket: 'example-instance-init',
+                        s3Bucket: 'example-instance-init/deploy',
                         s3BundleType: 'tar',
                         s3Key: 'deploy.tar'
                     )
