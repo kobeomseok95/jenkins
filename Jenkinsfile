@@ -34,12 +34,12 @@ pipeline {
 
         stage('Upload Deploy Files to S3') {
             steps {
-//                 sh 'mkdir deploy'
-//                 sh 'cp scripts/*.sh ./deploy'
-//                 sh 'cp appspec.yml ./deploy'
-//                 sh 'tar -cvf deploy.tar deploy/*'
+                sh 'mkdir deploy'
+                sh 'cp scripts/*.sh ./deploy'
+                sh 'cp appspec.yml ./deploy'
+                sh 'tar -cvf deploy.tar deploy/*'
                 withAWS(credentials: 'AWS IAM', region: 'ap-northeast-2') {
-                    s3Upload(bucket: 'example-instance-init', file: 'appspec.yml', path: 'deploy/')
+                    s3Upload(bucket: 'example-instance-init', file: 'deploy.tar', path: 'deploy/')
                 }
             }
         }
@@ -49,8 +49,8 @@ pipeline {
                 withAWS(credentials: 'AWS IAM', region: 'ap-northeast-2') {
                     createDeployment(
                         s3Bucket: 'example-instance-init',
-                        s3Key: 'deploy/appspec.yml',
-                        s3BundleType: 'YAML',
+                        s3Key: 'deploy/deploy.tar',
+                        s3BundleType: 'tar',
                         applicationName: 'example-codedeploy',
                         deploymentGroupName: 'example-deploy-group',
                         deploymentConfigName: 'CodeDeployDefault.AllAtOnce',
