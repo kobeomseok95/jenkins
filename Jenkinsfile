@@ -39,6 +39,7 @@ pipeline {
                 sh 'cp appspec.yml ./deploy'
                 sh 'cd deploy'
                 sh 'tar -cvf deploy.tar *'
+                sh 'cd ..'
                 withAWS(credentials: 'AWS IAM', region: 'ap-northeast-2') {
                     s3Upload(bucket: 'example-instance-init', file: 'deploy.tar', path: 'deploy/')
                 }
@@ -58,14 +59,13 @@ pipeline {
                 }
             }
         }
+    }
 
-        stage('Delete Image') {
-            steps {
-                script {
-                    sh 'docker rmi ${registry}'
-                    sh 'docker rmi openjdk:11-jdk-slim'
-                }
-            }
-        }
+    post {
+         always {
+            sh 'rm -rf deploy'
+            sh 'docker rmi ${registry}'
+            sh 'docker rmi openjdk:11-jdk-slim'
+         }
     }
 }
