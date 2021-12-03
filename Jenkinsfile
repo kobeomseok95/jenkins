@@ -32,15 +32,15 @@ pipeline {
             }
         }
 
-//         stage('Copy Deploy Files') {
-//             steps {
-//                 script {
-//                     sh 'mkdir deploy'
-//                     sh 'cp appspec.yml deploy/'
-//                     sh 'scripts/*.sh deploy/'
-//                 }
-//             }
-//         }
+        // copy and upload s3
+        stage('Upload Deploy Files to S3') {
+            steps {
+                withAWS(credentials: 'AWS IAM', endpointUrl: 's3://example-instance-init', region: 'ap-northeast-2') {
+                    sh 'aws s3 cp scripts/*.sh s3://example-instance-init/deploy/'
+                    sh 'aws s3 cp appspec.yml s3://example-instance-init/deploy/'
+                }
+            }
+        }
 
 //         stage('Deploy') {
 //             steps {
@@ -59,6 +59,7 @@ pipeline {
             steps {
                 script {
                     sh 'docker rmi ${registry}'
+                    sh 'docker rmi openjdk:11-jdk-slim'
                 }
             }
         }
