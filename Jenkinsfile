@@ -33,28 +33,28 @@ pipeline {
             }
         }
 
-        stage('Copy Deploy Files') {
-            steps {
-                script {
-                    sh 'mkdir deploy'
-                    sh 'cp appspec.yml deploy/'
-                    sh 'scripts/*.sh deploy/'
-                }
-            }
-        }
+//         stage('Copy Deploy Files') {
+//             steps {
+//                 script {
+//                     sh 'mkdir deploy'
+//                     sh 'cp appspec.yml deploy/'
+//                     sh 'scripts/*.sh deploy/'
+//                 }
+//             }
+//         }
 
-        stage('Deploy') {
-            steps {
-                script {
-                    sh'''aws deploy create-deployment \
-                    --application-name example-codedeploy \
-                    --deployment-group-name example-deploy-group \
-                    --revision revisionType=S3,s3Location={bucket=example-instance-init,\
-                    key=appspec.yml,bundleType=YAML}
-                    '''
-                }
-            }
-        }
+//         stage('Deploy') {
+//             steps {
+//                 script {
+//                     sh'''aws deploy create-deployment \
+//                     --application-name example-codedeploy \
+//                     --deployment-group-name example-deploy-group \
+//                     --revision revisionType=S3,s3Location={bucket=example-instance-init,\
+//                     key=appspec.yml,bundleType=YAML}
+//                     '''
+//                 }
+//             }
+//         }
 
         stage('Delete Image') {
             steps {
