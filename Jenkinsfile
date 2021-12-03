@@ -39,10 +39,10 @@ pipeline {
                 sh 'cp appspec.yml ./deploy'
                 sh 'cd deploy'
                 sh 'tar -cvf deploy.tar *'
-                sh 'cd ..'
                 withAWS(credentials: 'AWS IAM', region: 'ap-northeast-2') {
                     s3Upload(bucket: 'example-instance-init', file: 'deploy.tar', path: 'deploy/')
                 }
+                sh 'cd ..'
             }
         }
 
