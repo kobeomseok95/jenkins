@@ -51,7 +51,7 @@ pipeline {
                         s3Bucket: 'example-instance-init',
                         s3Key: 'deploy/deploy.tar',
                         s3BundleType: 'tar',
-                        applicationName: 'example-codedeploy',
+                        applicationName: 'example-deploy-application',
                         deploymentGroupName: 'example-deploy-group',
                         deploymentConfigName: 'CodeDeployDefault.AllAtOnce',
                         description: 'Test CodeDeploy',
