@@ -35,9 +35,9 @@ pipeline {
         // copy and upload s3
         stage('Upload Deploy Files to S3') {
             steps {
-                withAWS(credentials: 'AWS IAM', endpointUrl: 's3://example-instance-init', region: 'ap-northeast-2') {
-                    s3Upload(bucket: 'example-instance-init', file: 'scripts/deploy.sh', path: '/deploy/')
-                    s3Upload(bucket: 'example-instance-init', file: 'appspec.yml', path: '/deploy/')
+                withAWS(credentials: 'AWS IAM', region: 'ap-northeast-2') {
+                    s3Upload(bucket: 'example-instance-init', file: 'scripts/deploy.sh', path: 'deploy/')
+                    s3Upload(bucket: 'example-instance-init', file: 'appspec.yml', path: 'deploy/')
                 }
             }
         }
