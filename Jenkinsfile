@@ -49,7 +49,7 @@ pipeline {
                 withAWS(credentials: 'AWS IAM', region: 'ap-northeast-2') {
                     createDeployment(
                         applicationName: 'example-codedeploy',
-                        deploymentConfigName: 'CodeDeployDefault.AllAtOnce'
+                        deploymentConfigName: 'CodeDeployDefault.AllAtOnce',
                         deploymentGroupName: 'example-deploy-group',
                         description: 'CodeDeploy',
                         s3Bucket: 'example-instance-init/deploy',
