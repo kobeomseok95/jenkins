@@ -42,18 +42,19 @@ pipeline {
             }
         }
 
-//         stage('Deploy') {
-//             steps {
-//                 script {
-//                     sh'''aws deploy create-deployment \
-//                     --application-name example-codedeploy \
-//                     --deployment-group-name example-deploy-group \
-//                     --revision revisionType=S3,s3Location={bucket=example-instance-init,\
-//                     key=appspec.yml,bundleType=YAML}
-//                     '''
-//                 }
-//             }
-//         }
+        stage('Deploy') {
+            steps {
+                withAWS(credentials: 'AWS IAM', region: 'ap-northeast-2') {
+                    createDeployment(
+                        applicationName: 'example-codedeploy',
+                        deploymentGroupName: 'example-deploy-group',
+                        s3Bucket: 'example-instance-init',
+                        s3BundleType: 'YAML',
+                        s3Key: 'appspec.yml'
+                    )
+                }
+            }
+        }
 
         stage('Delete Image') {
             steps {
