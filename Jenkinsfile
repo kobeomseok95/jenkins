@@ -4,8 +4,7 @@ pipeline {
     environment {
         dockerImage = ''
         def registry = 'kobeomseok95/springbootapp'
-        registryCredential = 'jenkins-docker-hub-credentials'
-        def awsCredential = 'aws-credential'
+        registryCredential = 'dockerhub-credential'
     }
 
     stages {
