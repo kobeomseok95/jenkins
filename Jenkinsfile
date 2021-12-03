@@ -38,28 +38,30 @@ pipeline {
                 sh 'cp scripts/*.sh ./deploy'
                 sh 'cp appspec.yml ./deploy'
                 sh 'cd deploy'
+                sh 'pwd'
                 sh 'tar -cvf deploy.tar *'
                 withAWS(credentials: 'AWS IAM', region: 'ap-northeast-2') {
                     s3Upload(bucket: 'example-instance-init', file: 'deploy.tar', path: 'deploy/')
                 }
                 sh 'cd ..'
+                sh 'pwd'
             }
         }
 
-        stage('Deploy') {
-            steps {
-                withAWS(credentials: 'AWS IAM', region: 'ap-northeast-2') {
-                    createDeployment(
-                        applicationName: 'example-codedeploy',
-                        deploymentGroupName: 'example-deploy-group',
-                        s3Bucket: 'example-instance-init/deploy',
-                        s3BundleType: 'tar',
-                        s3Key: 'deploy.tar'
-                    )
-                }
-            }
-        }
-    }
+//         stage('Deploy') {
+//             steps {
+//                 withAWS(credentials: 'AWS IAM', region: 'ap-northeast-2') {
+//                     createDeployment(
+//                         applicationName: 'example-codedeploy',
+//                         deploymentGroupName: 'example-deploy-group',
+//                         s3Bucket: 'example-instance-init/deploy',
+//                         s3BundleType: 'tar',
+//                         s3Key: 'deploy.tar'
+//                     )
+//                 }
+//             }
+//         }
+//     }
 
     post {
          always {
